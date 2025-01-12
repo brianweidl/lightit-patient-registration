@@ -41,3 +41,27 @@ This command will:
 - Build the Docker images for the application and its dependencies.
 
 - Start the application and its associated services (NestJS app, MySQL database and Redis).
+-
+
+## Testing the Application
+
+To test that the patient registration is working as expected, you can send the following request to the endpoint:
+
+**`POST http://localhost:3000/patient`**
+
+```json
+{
+  "name": "Test",
+  "phone": "+1-418-543-8090",
+  "email": "<RECIPIENT_EMAIL>",
+  "address": "Buenos Aires",
+  "documentPhoto": "<BASE64_IMAGE>"
+}
+```
+
+You can use a tool like Postman or any HTTP client to send this request.
+
+### Notes
+
+- Replace `<RECIPIENT_EMAIL>` with the email address where you want to send the test notification.
+- Replace `<BASE64_IMAGE>` with a valid base64-encoded string representing the image of the document.
