@@ -1,0 +1,13 @@
+# Compiled output
+node_modules/
+dist/
+
+# Environment variable files
+.env
+
+# IDE 
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
