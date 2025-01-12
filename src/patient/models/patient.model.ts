@@ -7,6 +7,7 @@ export type PatientAttributes = {
   email: string;
   phone: string;
   address: string;
+  documentPhotoPath: string;
 };
 
 export type PatientCreationAttributes = Omit<PatientAttributes, 'id'>;
@@ -24,4 +25,10 @@ export class Patient extends Model<Patient> {
 
   @Column({ type: DataTypes.STRING })
   address: string;
+
+  @Column({
+    type: DataTypes.STRING,
+    field: 'document_photo_path',
+  })
+  documentPhotoPath: string;
 }

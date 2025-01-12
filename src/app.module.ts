@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { PatientModule } from './patient/patient.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Patient } from './patient/models/patient.model';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -17,8 +16,7 @@ import { Patient } from './patient/models/patient.model';
       database: process.env.DB_NAME,
       models: [Patient],
     }),
+    MediaModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

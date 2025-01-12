@@ -12,4 +12,7 @@ export class CreatePatientDto {
 
   @IsNotEmpty()
   address: string;
+
+  @IsNotEmpty()
+  documentPhoto: string; //Base64 string
 }

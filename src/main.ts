@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
+import * as bodyParser from 'body-parser';
 
 async function connectToDatabase(app: INestApplication, logger: Logger) {
   const sequelize = app.get(Sequelize);
@@ -35,6 +36,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const logger = new Logger('Main');
   app.useGlobalPipes(new ValidationPipe({}));
+
+  app.use(bodyParser.json({ limit: '10mb' }));
 
   await connectToDatabase(app, logger);
 
