@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -14,7 +14,7 @@ export class MediaService {
   async handleMedia(base64String: string): Promise<string> {
     const matches = base64String.match(/^data:(.+);base64,(.+)$/);
     if (!matches || matches.length !== 3) {
-      throw new Error('Invalid Base64 string');
+      throw new BadRequestException('Invalid Base64 string');
     }
 
     const fileType = matches[1];

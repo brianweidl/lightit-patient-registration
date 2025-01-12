@@ -1,10 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectQueue } from '@nestjs/bull';
 import { Queue } from 'bull';
+import { EMAIL_QUEUE_NAME } from '../constants';
 
 @Injectable()
 export class EmailService {
-  constructor(@InjectQueue('emailQueue') private emailQueue: Queue) {}
+  constructor(@InjectQueue(EMAIL_QUEUE_NAME) private emailQueue: Queue) {}
   private logger = new Logger(EmailService.name);
 
   async sendEmail(

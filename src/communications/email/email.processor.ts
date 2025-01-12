@@ -2,8 +2,9 @@ import { Process, Processor } from '@nestjs/bull';
 import { Logger } from '@nestjs/common';
 import { Job } from 'bull';
 import * as nodemailer from 'nodemailer';
+import { EMAIL_QUEUE_NAME } from '../constants';
 
-@Processor('emailQueue')
+@Processor(EMAIL_QUEUE_NAME)
 export class EmailProcessor {
   private transporter: nodemailer.Transporter;
   private logger = new Logger(EmailProcessor.name);

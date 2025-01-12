@@ -16,7 +16,7 @@ export class PatientController {
       return newPatient;
     } catch (error) {
       this.logger.error('Failed to create patient:', error);
-      throw new Error('Failed to create patient');
+      throw error;
     }
   }
 
