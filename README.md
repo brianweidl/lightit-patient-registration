@@ -41,7 +41,6 @@ This command will:
 - Build the Docker images for the application and its dependencies.
 
 - Start the application and its associated services (NestJS app, MySQL database and Redis).
--
 
 ## Testing the Application
 
