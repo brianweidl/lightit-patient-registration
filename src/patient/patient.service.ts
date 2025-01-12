@@ -1,8 +1,9 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreatePatientDto } from './dto/create-patient-dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Patient, PatientCreationAttributes } from './models/patient.model';
 import { MediaService } from 'src/media/media.service';
+import { EmailService } from 'src/communications/email/email.service';
 
 @Injectable()
 export class PatientService {
@@ -10,10 +11,12 @@ export class PatientService {
     @InjectModel(Patient)
     private patientModel: typeof Patient,
     private mediaService: MediaService,
+    private emailService: EmailService,
   ) {}
-  private logger = new Logger(PatientService.name);
+
   async handleCreation(createPatientDto: CreatePatientDto): Promise<Patient> {
     const { name, email, address, phone, documentPhoto } = createPatientDto;
+
     const mediaPath = await this.mediaService.handleMedia(documentPhoto);
 
     const newPatient = await this.create({
@@ -23,6 +26,12 @@ export class PatientService {
       phone,
       documentPhotoPath: mediaPath,
     });
+
+    await this.emailService.sendEmail(
+      createPatientDto.email,
+      'Patient Registration',
+      'Patient registered successfully',
+    );
 
     return newPatient;
   }

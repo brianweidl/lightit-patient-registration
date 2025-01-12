@@ -3,6 +3,7 @@ import { PatientModule } from './patient/patient.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Patient } from './patient/models/patient.model';
 import { MediaModule } from './media/media.module';
+import { CommunicationsModule } from './communications/communications.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MediaModule } from './media/media.module';
       models: [Patient],
     }),
     MediaModule,
+    CommunicationsModule,
   ],
 })
 export class AppModule {}

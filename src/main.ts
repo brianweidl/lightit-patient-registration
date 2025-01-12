@@ -19,7 +19,10 @@ async function connectToDatabase(app: INestApplication, logger: Logger) {
       break;
     } catch (err) {
       retries -= 1;
-      logger.error(`Failed to connect to the database.`, err.message);
+      logger.error(
+        `Failed to connect to the database. Retries left: ${retries}`,
+        err.message,
+      );
       if (retries === 0) {
         logger.error('Maximum retries reached. Exiting...');
         process.exit(1); // Exit the process if all retries fail
