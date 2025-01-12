@@ -1,4 +1,4 @@
-import { Body, Controller, Logger, Post } from '@nestjs/common';
+import { Body, Controller, Get, Logger, Post } from '@nestjs/common';
 import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient-dto';
 
@@ -11,11 +11,17 @@ export class PatientController {
   @Post()
   async create(@Body() createPatientDto: CreatePatientDto) {
     try {
-      const newPatient = await this.patientService.create(createPatientDto);
+      const newPatient =
+        await this.patientService.handleCreation(createPatientDto);
       return newPatient;
     } catch (error) {
       this.logger.error('Failed to create patient:', error);
       throw new Error('Failed to create patient');
     }
+  }
+
+  @Get()
+  async findAll() {
+    return this.patientService.findAll();
   }
 }
